@@ -20,5 +20,7 @@ namespace QuizApplication.Context
         {
             return await Task.Run(() => { return new AppDbContext(); });
         }
+
+
     }
 }
