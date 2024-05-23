@@ -10,6 +10,7 @@ namespace QuizApplication.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool IsFinished { get; set; }
         public IEnumerable<MainQuestion> Questions { get; set; }
     }
 }
