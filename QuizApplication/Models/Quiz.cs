@@ -12,5 +12,8 @@ namespace QuizApplication.Models
         public string Name { get; set; }
         public bool IsFinished { get; set; }
         public IEnumerable<MainQuestion> Questions { get; set; }
+        public IEnumerable<MainQuestion> AnsweredQuestions { get; set; }
+        public int TotalScore { get; set; }    //result of answeared questions in percents
+        public DateTime UpdateDate { get; set; }
     }
 }

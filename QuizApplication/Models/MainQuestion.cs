@@ -19,5 +19,6 @@ namespace QuizApplication.Models
         public string Type { get; set; }
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; }
+        public string UserAnswear { get; set; }
     }
 }
