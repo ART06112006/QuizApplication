@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using QuizApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,19 @@ namespace QuizApplication.Context
             return await Task.Run(() => { return new AppDbContext(); });
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("AppSettings.json").Build();
 
+            //Context
+            string connectionString = configuration.GetConnectionString("AppDatabase");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Quiz
+            modelBuilder.Entity<Quiz>().HasMany(x => x.Questions).WithOne(x => x.Quiz);
+        }
     }
 }

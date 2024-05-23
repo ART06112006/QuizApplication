@@ -17,5 +17,7 @@ namespace QuizApplication.Models
         public string CorrectAnswer { get; set; }
         public IEnumerable<string> IncorrectAnswers { get; set; }
         public string Type { get; set; }
+        public int QuizId { get; set; }
+        public Quiz Quiz { get; set; }
     }
 }
