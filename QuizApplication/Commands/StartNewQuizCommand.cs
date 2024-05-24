@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApplication.ViewModels
+namespace QuizApplication.Commands
 {
-    public class QuizViewModel : BaseViewModel
+    public class StartNewQuizCommand : BaseCommand
     {
-        public QuizViewModel()
+        public override void Execute(object? parameter)
         {
-
+            
         }
     }
 }
