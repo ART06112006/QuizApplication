@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuizApplication.Models
 {
-    public class MainQuestion
+    public class Question
     {
         public int Id { get; set; }
         public string Category { get; set; }
