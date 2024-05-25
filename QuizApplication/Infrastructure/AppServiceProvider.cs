@@ -41,17 +41,13 @@ namespace QuizApplication.Infrastructure
             //Repositories
             services.AddSingleton<QuizRepository>();
 
-<<<<<<< Updated upstream
             //Views
             services.AddTransient<QuizWindow>();
             services.AddTransient<QuizSettingsWindow>();
 
-            //ViewModels
-            services.AddTransient<QuizViewModel>();
-=======
             //Commands
             services.AddTransient<StartNewQuizCommand>();
->>>>>>> Stashed changes
+            services.AddTransient<ChangeQuizSettingsWindowCommand>();
 
             ServiceProvider = services.BuildServiceProvider();
         }

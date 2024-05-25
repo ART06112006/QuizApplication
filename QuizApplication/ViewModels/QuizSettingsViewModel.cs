@@ -1,9 +1,11 @@
-﻿using QuizApplication.Services;
+﻿using QuizApplication.Commands;
+using QuizApplication.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace QuizApplication.ViewModels
 {
@@ -55,13 +57,27 @@ namespace QuizApplication.ViewModels
             }
         }
 
-        public QuizSettingsViewModel(APIQuestionService apIQuestionService)
+        private List<string> _selectedCategories;
+        public List<string> SelectedCategories
+        {
+            get { return _selectedCategories; }
+            set
+            {
+                _selectedCategories = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public QuizSettingsViewModel(APIQuestionService apIQuestionService, StartNewQuizCommand startNewQuizCommand)
         {
             _apIQuestionService = apIQuestionService;
+            StartQuiz = startNewQuizCommand;
             Categories = new List<string>();
             Difficulty = new List<string>() { "easy", "medium", "hard"};
             LoadInfo();
         }
+
+        public ICommand StartQuiz { get; set; }
 
         private async void LoadInfo()
         {

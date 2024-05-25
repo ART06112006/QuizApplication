@@ -10,9 +10,11 @@ namespace QuizApplication.ViewModels
 {
     public class QuizViewModel : BaseViewModel
     {
-        public QuizViewModel()
+        public QuizViewModel(ChangeQuizSettingsWindowCommand changeQuizSettingsWindow)
         {
-            
+            StartQuiz = changeQuizSettingsWindow;
         }
+
+        public ICommand StartQuiz { get; set; }
     }
 }
