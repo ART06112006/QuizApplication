@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using QuizApplication.Context;
 using QuizApplication.Models;
 using QuizApplication.Services;
 using System;
@@ -17,10 +18,13 @@ namespace QuizApplication.Infrastructure
         {
             var services = new ServiceCollection();
 
+            //AutoMapper
             services.AddAutoMapper(typeof(AppServiceProvider));
             ConfigureAutoMapper(services);
 
+            //Services
             services.AddSingleton<APIQuestionService>();
+            services.AddSingleton<QuizService>();
 
             ServiceProvider = services.BuildServiceProvider();
         }
@@ -35,6 +39,11 @@ namespace QuizApplication.Infrastructure
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+        }
+
+        public static async Task<AppDbContext> GetAppDbContextAsync()
+        {
+            return await Task.Run(() => { return new AppDbContext(); });
         }
     }
 }

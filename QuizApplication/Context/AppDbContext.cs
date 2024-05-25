@@ -18,11 +18,6 @@ namespace QuizApplication.Context
             Database.EnsureCreated();
         }
 
-        public static async Task<AppDbContext> AppDbContextAsync()
-        {
-            return await Task.Run(() => { return new AppDbContext(); });
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("AppSettings.json").Build();
