@@ -7,13 +7,19 @@ using System.Threading.Tasks;
 
 namespace QuizApplication.Models
 {
+    public class QuestionText
+    {
+        [JsonProperty("text")]
+        public string Text { get; set; }
+    }
+
     public class APIQuestion
     {
         [JsonProperty("category")]
         public string Category { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string QuestionId { get; set; }
 
         [JsonProperty("tags")]
         public List<string> Tags { get; set; }
@@ -28,7 +34,7 @@ namespace QuizApplication.Models
         public bool IsNiche { get; set; }
 
         [JsonProperty("question")]
-        public APIQuestion2 QuestionText { get; set; }
+        public QuestionText Question { get; set; }
 
         [JsonProperty("correctAnswer")]
         public string CorrectAnswer { get; set; }
@@ -38,23 +44,5 @@ namespace QuizApplication.Models
 
         [JsonProperty("type")]
         public string Type { get; set; }
-    }
-
-    public class APIQuestion2
-    {
-        [JsonProperty("text")]
-        public string Text { get; set; }
-    }
-
-    public class APIQuiz
-    {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("questions")]
-        public List<Question> Questions { get; set; }
     }
 }
