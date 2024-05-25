@@ -10,6 +10,9 @@ namespace QuizApplication.Commands
 {
     public class StartNewQuizCommand : BaseCommand
     {
-        
+        public override void Execute(object? parameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
