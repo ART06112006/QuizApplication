@@ -1,4 +1,5 @@
 ﻿using QuizApplication.Infrastructure;
+using QuizApplication.ViewModels;
 using QuizApplication.Views;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,12 @@ namespace QuizApplication.Commands
     {
         public override void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            var viewModel = parameter as QuizViewModel;
+
+            if (viewModel != null)
+            {
+
+            }
         }
     }
 }
