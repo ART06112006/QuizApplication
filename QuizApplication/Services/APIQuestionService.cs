@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using QuizApplication.Infrastructure;
 using QuizApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -14,16 +16,18 @@ namespace QuizApplication.Services
 {
     public class APIQuestionService
     {
-        private string categoriesUrl = "https://the-trivia-api.com/v2/categories";
-        private string questionsUrl = "https://the-trivia-api.com/v2/questions";
+        private string _categoriesUrl;
+        private string _questionsUrl;
 
         private readonly IMapper _mapper;
 
         public Action<string> ExceptionMessage { get; set; }
 
-        public APIQuestionService(IMapper mapper) 
+        public APIQuestionService(IMapper mapper, UrlsConfig urlsConfig) 
         { 
             _mapper = mapper;
+            _categoriesUrl = urlsConfig.CategoriesUrl;
+            _questionsUrl = urlsConfig.QuestionsUrl;
         }
 
         public async Task<List<string>> GetCategoriesAsync()
@@ -32,7 +36,7 @@ namespace QuizApplication.Services
             {
                 using (var client = new HttpClient())
                 {
-                    var response = await client.GetStringAsync(categoriesUrl);
+                    var response = await client.GetStringAsync(_categoriesUrl);
 
                     if (response != null)
                     {
@@ -70,7 +74,7 @@ namespace QuizApplication.Services
                     var categoriesStr = string.Join(",", categories);
                     var difficultiesStr = string.Join(",", difficultyLevels);
 
-                    var configuratedUrl = questionsUrl + $"?limit={questionLimit}&categories={categoriesStr}&difficulties={difficultiesStr}";
+                    var configuratedUrl = _questionsUrl + $"?limit={questionLimit}&categories={categoriesStr}&difficulties={difficultiesStr}";
 
                     var response = await client.GetStringAsync(configuratedUrl);
 

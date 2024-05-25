@@ -15,7 +15,6 @@ namespace QuizApplication.Commands
         public override async void Execute(object? parameter)
         {
             var viewModel = parameter as QuizSettingsViewModel;
-            var quizViewModel = parameter as QuizViewModel;
 
             if (viewModel != null)
             {
