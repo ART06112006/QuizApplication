@@ -30,6 +30,7 @@ namespace QuizApplication.Infrastructure
             var configuration = LoadConfiguration();
             services.AddSingleton<Microsoft.Extensions.Configuration.IConfiguration>(configuration);
 
+            //Urls
             services.AddSingleton(new UrlsConfig()
             {
                 CategoriesUrl = configuration["Urls:CategoriesUrl"],
@@ -54,10 +55,6 @@ namespace QuizApplication.Infrastructure
 
             //Repositories
             services.AddSingleton<QuizRepository>();
-
-            //Views
-            services.AddTransient<QuizWindow>();
-            services.AddTransient<QuizSettingsWindow>();
 
             //Commands
             services.AddTransient<StartNewQuizCommand>();
