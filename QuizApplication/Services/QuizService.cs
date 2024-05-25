@@ -1,4 +1,5 @@
 ﻿using QuizApplication.Models;
+using QuizApplication.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace QuizApplication.Services
         {
             try
             {
-                await _quizRepository.AddItemAsync(quiz);
+                await _quizRepository.AddAsync(quiz);
             }
             catch (Exception ex)
             {
@@ -60,7 +61,7 @@ namespace QuizApplication.Services
         {
             try
             {
-                await _quizRepository.RemoveItemAsync(name);
+                await _quizRepository.RemoveAsync(name);
             }
             catch (Exception ex)
             {
@@ -72,7 +73,7 @@ namespace QuizApplication.Services
         {
             try
             {
-                await _quizRepository.UpdateItemAsync(quiz);
+                await _quizRepository.UpdateAsync(quiz);
             }
             catch (Exception ex)
             {
