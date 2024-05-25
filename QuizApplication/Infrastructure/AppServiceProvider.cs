@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using QuizApplication.Context;
 using QuizApplication.Models;
+using QuizApplication.Repositories;
 using QuizApplication.Services;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,9 @@ namespace QuizApplication.Infrastructure
             services.AddSingleton<APIQuestionService>();
             services.AddSingleton<QuizService>();
 
+            //Repositories
+            services.AddSingleton<QuizRepository>();
+
             ServiceProvider = services.BuildServiceProvider();
         }
 
@@ -34,7 +38,6 @@ namespace QuizApplication.Infrastructure
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.CreateMap<APIQuestion, Question>();
-
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
