@@ -1,8 +1,6 @@
 ﻿using QuizApplication.Infrastructure;
-<<<<<<< Updated upstream
+using QuizApplication.Services;
 using QuizApplication.ViewModels;
-=======
->>>>>>> Stashed changes
 using QuizApplication.Views;
 using System;
 using System.Collections.Generic;
@@ -14,19 +12,23 @@ namespace QuizApplication.Commands
 {
     public class StartNewQuizCommand : BaseCommand
     {
-        public override void Execute(object? parameter)
+        public override async void Execute(object? parameter)
         {
-<<<<<<< Updated upstream
             var viewModel = parameter as QuizViewModel;
 
             if (viewModel != null)
             {
+                var apiQuestionService = (APIQuestionService)(AppServiceProvider.ServiceProvider.GetService(typeof(APIQuestionService)));
+                var quiz = await apiQuestionService.GetQuizAsync(viewModel.QuizName, viewModel.QuestionLimit, viewModel.Difficulty, viewModel.Categories);
 
+                if (quiz != null)
+                {
+                    var quizService = (QuizService)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizService)));
+                    await quizService.AddQuizAsync(quiz);
+
+                    //Update UI TODO
+                }
             }
-=======
-            var window = (QuizSettingsWindow)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizSettingsWindow)));
-            window.ShowDialog();
->>>>>>> Stashed changes
         }
     }
 }
