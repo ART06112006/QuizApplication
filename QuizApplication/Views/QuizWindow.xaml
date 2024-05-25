@@ -47,8 +47,8 @@
                     <RadioButton Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White"/>
                 </Grid>
             </Border>
-            
-            <Button Grid.Row="2" Width="150" Height="43" Margin="10" Content="Start new Quiz" 
+
+            <Button Grid.Row="2" Width="150" Height="43" Margin="10" Content="Start new Quiz" Command="{Binding StartNewQuiz}" 
                     Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="Transparent">
                 <Button.Resources>
                     <Style TargetType="Border">

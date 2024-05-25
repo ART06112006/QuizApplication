@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -22,9 +23,10 @@ namespace QuizApplication.Views
     /// 
     public partial class QuizWindow : Window
     {
-        public QuizWindow()
+        public QuizWindow(QuizViewModel quizViewModel)
         {
             InitializeComponent();
+            DataContext = quizViewModel;
         }
     }
 }

@@ -17,30 +17,37 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label Content="Quiz Type" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" Foreground="White" FontSize="15"/>
 
-                <ListBox Grid.Row="1" Width="200" Height="200" Margin="7">
-
-                </ListBox>
+                <ListBox Grid.Row="1" Width="200" Height="200" Margin="7" ItemsSource="{Binding Categories}" SelectionMode="Multiple"/>
 
                 <Label Content="Difficulty" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,20,0,0"/>
-                <ListBox Grid.Row="3" Width="200" Height="200" Margin="7">
 
+                <ListBox Grid.Row="3" Width="200" Height="200" Margin="7" ItemsSource="{Binding Difficulty}">
+                    
                 </ListBox>
 
                 <Label Content="Questions number" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,20,0,0"/>
 
                 <WrapPanel Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0">
-                    <RadioButton Content="10" Margin="0,0,50,0" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="30" Margin="0,0,0,0" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="50" Margin="50,0,0,0" Foreground="White" FontSize="14"/>
+                    <ComboBox SelectedItem="{Binding QuestionLimit}">
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="30"/>
+                        <ComboBoxItem Content="50"/>
+                    </ComboBox>
                 </WrapPanel>
 
-                <Button Content="New Quiz" Grid.Row="6" Width="70" Height="35" Margin="5,20,5,10">
+                <Button Content="New Quiz" Grid.Row="8" Width="70" Height="35" Margin="5,20,5,10">
                    
                 </Button>
+
+                <Label Content="Quiz Name" HorizontalContentAlignment="Center" Grid.Row="6" FontSize="15" Foreground="White"/>
+                <TextBox Grid.Row="7" Text="{Binding QuizName}" Width="250"/>
+
             </Grid>
         </ScrollViewer>
     </Grid>

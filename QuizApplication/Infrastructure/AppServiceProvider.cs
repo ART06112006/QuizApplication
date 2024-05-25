@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using QuizApplication.Commands;
 using QuizApplication.Context;
 using QuizApplication.Models;
 using QuizApplication.Repositories;
@@ -21,6 +22,14 @@ namespace QuizApplication.Infrastructure
         {
             var services = new ServiceCollection();
 
+            //Views
+            services.AddTransient<QuizWindow>();
+            services.AddTransient<QuizSettingsWindow>();
+
+            //ViewModels
+            services.AddTransient<QuizViewModel>();
+            services.AddTransient<QuizSettingsViewModel>();
+
             //AutoMapper
             services.AddAutoMapper(typeof(AppServiceProvider));
             ConfigureAutoMapper(services);
@@ -32,12 +41,17 @@ namespace QuizApplication.Infrastructure
             //Repositories
             services.AddSingleton<QuizRepository>();
 
+<<<<<<< Updated upstream
             //Views
             services.AddTransient<QuizWindow>();
             services.AddTransient<QuizSettingsWindow>();
 
             //ViewModels
             services.AddTransient<QuizViewModel>();
+=======
+            //Commands
+            services.AddTransient<StartNewQuizCommand>();
+>>>>>>> Stashed changes
 
             ServiceProvider = services.BuildServiceProvider();
         }

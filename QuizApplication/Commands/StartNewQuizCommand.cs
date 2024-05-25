@@ -1,5 +1,8 @@
 ﻿using QuizApplication.Infrastructure;
+<<<<<<< Updated upstream
 using QuizApplication.ViewModels;
+=======
+>>>>>>> Stashed changes
 using QuizApplication.Views;
 using System;
 using System.Collections.Generic;
@@ -13,12 +16,17 @@ namespace QuizApplication.Commands
     {
         public override void Execute(object? parameter)
         {
+<<<<<<< Updated upstream
             var viewModel = parameter as QuizViewModel;
 
             if (viewModel != null)
             {
 
             }
+=======
+            var window = (QuizSettingsWindow)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizSettingsWindow)));
+            window.ShowDialog();
+>>>>>>> Stashed changes
         }
     }
 }
