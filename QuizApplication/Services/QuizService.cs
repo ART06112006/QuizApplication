@@ -11,6 +11,8 @@ namespace QuizApplication.Services
     {
         private readonly QuizRepository _quizRepository;
 
+        public Action<string> ExceptionMessage;
+
         public QuizService(QuizRepository quizRepository)
         {
             _quizRepository = quizRepository;
@@ -18,27 +20,64 @@ namespace QuizApplication.Services
 
         public async Task<List<string>> GetQuizNamesAsync()
         {
-            return new List<string>(await _quizRepository.SelectListByConditionAsync(x => x.Name));
+            try
+            {
+                return new List<string>(await _quizRepository.SelectListByConditionAsync(x => x.Name));
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage?.Invoke(ex.Message);
+                return null;
+            }
         }
 
         public async Task<Quiz> GetQuizAsync(string name)
         {
-            return await _quizRepository.GetItemByConditionAsync(x => x.Name == name);
+            try
+            {
+                return await _quizRepository.GetItemByConditionAsync(x => x.Name == name);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage?.Invoke(ex.Message);
+                return null;
+            }
         }
 
         public async Task AddQuizAsync(Quiz quiz)
         {
-            await _quizRepository.AddItemAsync(quiz);
+            try
+            {
+                await _quizRepository.AddItemAsync(quiz);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage?.Invoke(ex.Message);
+            }
         }
 
         public async Task RemoveQuizAsync(string name)
         {
-            await _quizRepository.RemoveItemAsync(name);
+            try
+            {
+                await _quizRepository.RemoveItemAsync(name);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage?.Invoke(ex.Message);
+            }
         }
 
         public async Task UpdateQuizAsync(Quiz quiz)
         {
-            await _quizRepository.UpdateItemAsync(quiz);
+            try
+            {
+                await _quizRepository.UpdateItemAsync(quiz);
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage?.Invoke(ex.Message);
+            }
         }
     }
 }
