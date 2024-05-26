@@ -76,7 +76,7 @@ namespace QuizApplication.Infrastructure
         {
             var mappingConfig = new MapperConfiguration(mc =>
             {
-                mc.CreateMap<APIQuestion, Question>();
+                mc.CreateMap<APIQuestion, Question>().ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Question.Text));
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
