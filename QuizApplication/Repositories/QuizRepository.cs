@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuizApplication.Context;
+using QuizApplication.Exceptions;
 using QuizApplication.Infrastructure;
 using QuizApplication.Models;
 using QuizApplication.Repositories.IRepositories;
