@@ -50,8 +50,12 @@ namespace QuizApplication.Repositories
             {
                 using (var _appDbContext = await AppServiceProvider.GetAppDbContextAsync())
                 {
-                    await _appDbContext.Quizes.AddAsync(quiz);
-                    await _appDbContext.SaveChangesAsync();
+                    if (!(await _appDbContext.Quizes.AnyAsync(x => x.Name == quiz.Name)))
+                    {
+                        await _appDbContext.Quizes.AddAsync(quiz);
+                        await _appDbContext.SaveChangesAsync();
+                    }
+                    else throw new ItemExistsException();
                 }
             }
             catch
