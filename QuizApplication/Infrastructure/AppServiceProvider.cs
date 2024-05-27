@@ -78,8 +78,13 @@ namespace QuizApplication.Infrastructure
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.CreateMap<APIQuestion, Question>()
+                    .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
+                    .ForMember(dest => dest.Tags, opt => opt.MapFrom<TagsResolver>())
+                    .ForMember(dest => dest.Difficulty, opt => opt.MapFrom(src => src.Difficulty))
                     .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Question.Text))
-                    .ForMember(dest => dest.IncorrectAnswers, opt => opt.MapFrom(src => src.IncorrectAnswers));
+                    .ForMember(dest => dest.CorrectAnswer, opt => opt.MapFrom(src => src.CorrectAnswer))
+                    .ForMember(dest => dest.IncorrectAnswers, opt => opt.MapFrom<IncorrectAnswersResolver>())
+                    .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type));
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -96,5 +101,21 @@ namespace QuizApplication.Infrastructure
     {
         public string CategoriesUrl { get; set; }
         public string QuestionsUrl { get; set; }
+    }
+
+    public class TagsResolver : IValueResolver<APIQuestion, Question, IEnumerable<Tag>>
+    {
+        public IEnumerable<Tag> Resolve(APIQuestion source, Question destination, IEnumerable<Tag> destMember, ResolutionContext context)
+        {
+            return source.Tags?.Select(tag => new Tag { Text = tag }).ToList() ?? new List<Tag>();
+        }
+    }
+
+    public class IncorrectAnswersResolver : IValueResolver<APIQuestion, Question, IEnumerable<Answer>>
+    {
+        public IEnumerable<Answer> Resolve(APIQuestion source, Question destination, IEnumerable<Answer> destMember, ResolutionContext context)
+        {
+            return source.IncorrectAnswers?.Select(answer => new Answer { Text = answer }).ToList() ?? new List<Answer>();
+        }
     }
 }
