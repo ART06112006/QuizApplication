@@ -31,7 +31,6 @@ namespace QuizApplication.Context
         {
             //Quiz
             modelBuilder.Entity<Quiz>().HasMany(x => x.Questions).WithOne(x => x.Quiz);
-            modelBuilder.Entity<Quiz>().HasMany(x => x.AnsweredQuestions).WithOne(x => x.Quiz);
         }
 
         public DbSet<Quiz> Quizes { get; set; }

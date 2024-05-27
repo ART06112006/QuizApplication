@@ -26,7 +26,6 @@ namespace QuizApplication.Commands
                     var quizService = (QuizService)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizService)));
                     //await quizService.AddQuizAsync(quiz);
 
-                    //Update UI TODO
                     viewModel.Quiz = quiz;
                     viewModel.Close.Invoke();
                 }
