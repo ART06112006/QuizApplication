@@ -30,7 +30,7 @@ namespace QuizApplication.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Quiz
-            modelBuilder.Entity<Quiz>().HasMany(x => x.Questions).WithOne(x => x.Quiz);
+            modelBuilder.Entity<Quiz>().HasMany(x => x.Questions).WithOne(x => x.Quiz).HasForeignKey(x => x.QuizId);
         }
 
         public DbSet<Quiz> Quizes { get; set; }
