@@ -1,4 +1,5 @@
 ﻿using QuizApplication.Commands;
+using QuizApplication.Models;
 using QuizApplication.Services;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace QuizApplication.ViewModels
             get { return _qestionLimit; }
             set
             {
-                _qestionLimit = value;
+                _qestionLimit = value.ToString();
                 OnPropertyChanged();
             }
         }
@@ -68,16 +69,47 @@ namespace QuizApplication.ViewModels
             }
         }
 
+        public List<string> _selectedDifficulty;
+        public List<string> SelectedDifficulty
+        {
+            get { return _selectedDifficulty; }
+            set
+            {
+                _selectedDifficulty = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<string> _qestionLimits;
+        public List<string> QuestionLimits
+        {
+            get { return _qestionLimits; }
+            set
+            {
+                _qestionLimits = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //public QuizViewModel _quizViewModel;
+
+        public Quiz Quiz { get; set; }
+
         public QuizSettingsViewModel(APIQuestionService apIQuestionService, StartNewQuizCommand startNewQuizCommand)
         {
             _apIQuestionService = apIQuestionService;
             StartQuiz = startNewQuizCommand;
             Categories = new List<string>();
             Difficulty = new List<string>() { "easy", "medium", "hard"};
+            QuestionLimits = new List<string>() { "10", "20", "30", "40", "50" };
+            SelectedDifficulty = new List<string>();
+            SelectedCategories = new List<string>();
             LoadInfo();
         }
 
         public ICommand StartQuiz { get; set; }
+
+        public Action Close { get; set; }
 
         private async void LoadInfo()
         {

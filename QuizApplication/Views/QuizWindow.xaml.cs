@@ -23,10 +23,29 @@ namespace QuizApplication.Views
     /// 
     public partial class QuizWindow : Window
     {
+        public QuizViewModel QuizViewModel { get; set; }
         public QuizWindow(QuizViewModel quizViewModel)
         {
             InitializeComponent();
             DataContext = quizViewModel;
+            QuizViewModel= quizViewModel;
         }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+
+            if (radioButton.Content != null)
+            {
+                QuizViewModel.SelectedAnswers = radioButton.Content.ToString();
+                radioButton.IsChecked = false;
+            }
+            else
+            {
+                MessageBox.Show("Please press \"Start new Quiz\" to start");
+                radioButton.IsChecked = false;
+            }
+        }
+
     }
 }

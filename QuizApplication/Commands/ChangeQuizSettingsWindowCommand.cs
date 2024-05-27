@@ -1,4 +1,5 @@
 ﻿using QuizApplication.Infrastructure;
+using QuizApplication.ViewModels;
 using QuizApplication.Views;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ namespace QuizApplication.Commands
         {
             var window = (QuizSettingsWindow)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizSettingsWindow)));
             window.ShowDialog();
+
+            if (window._quizSettingsViewModel.Quiz != null)
+            {
+                var viewModel = parameter as QuizViewModel;
+                viewModel.UpdateUI(window._quizSettingsViewModel.Quiz);
+            }
         }
     }
 }

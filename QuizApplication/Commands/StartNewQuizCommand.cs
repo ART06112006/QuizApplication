@@ -19,15 +19,16 @@ namespace QuizApplication.Commands
             if (viewModel != null)
             {
                 var apiQuestionService = (APIQuestionService)(AppServiceProvider.ServiceProvider.GetService(typeof(APIQuestionService)));
-                var quiz = await apiQuestionService.GetQuizAsync(viewModel.QuizName, int.Parse(viewModel.QuestionLimit), viewModel.Difficulty, viewModel.Categories);
+                var quiz = await apiQuestionService.GetQuizAsync(viewModel.QuizName, int.Parse(viewModel.QuestionLimit.ToString()), viewModel.SelectedDifficulty, viewModel.SelectedCategories);
 
                 if (quiz != null)
                 {
                     var quizService = (QuizService)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizService)));
-                    await quizService.AddQuizAsync(quiz);
+                    //await quizService.AddQuizAsync(quiz);
 
                     //Update UI TODO
-                    
+                    viewModel.Quiz = quiz;
+                    viewModel.Close.Invoke();
                 }
             }
         }

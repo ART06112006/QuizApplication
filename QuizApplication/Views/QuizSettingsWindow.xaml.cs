@@ -20,10 +20,39 @@ namespace QuizApplication.Views
     /// </summary>
     public partial class QuizSettingsWindow : Window
     {
+        public QuizSettingsViewModel _quizSettingsViewModel;
+
         public QuizSettingsWindow(QuizSettingsViewModel quizSettingsViewModel)
         {
             InitializeComponent();
             DataContext = quizSettingsViewModel;
+            _quizSettingsViewModel = quizSettingsViewModel;
+            _quizSettingsViewModel.Close = () => { this.Close(); };
+        }
+
+        private void CategoriesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var category in CategoriesListBox.Items)
+            {
+                if (category == CategoriesListBox.SelectedItem.ToString())
+                {
+                    _quizSettingsViewModel.SelectedCategories.Add(category.ToString());
+                    break;
+                }
+            }
+            
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var category in DifficultyListBox.Items)
+            {
+                if (category == DifficultyListBox.SelectedItem.ToString())
+                {
+                    _quizSettingsViewModel.SelectedDifficulty.Add(category.ToString());
+                    break;
+                }
+            }
         }
     }
 }
