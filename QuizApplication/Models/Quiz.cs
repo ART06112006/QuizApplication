@@ -11,8 +11,8 @@ namespace QuizApplication.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsFinished { get; set; }
-        public IEnumerable<Question> Questions { get; set; }
-        public IEnumerable<Question> AnsweredQuestions => Questions?.Where(q => !string.IsNullOrEmpty(q.UserAnswer));
+        public ICollection<Question> Questions { get; set; }
+        public ICollection<Question> AnsweredQuestions => Questions?.Where(q => !string.IsNullOrEmpty(q.UserAnswer)).ToList();
         public int TotalScore { get; set; }    //result of answeared questions in percents
         public DateTime UpdateDate { get; set; }
     }

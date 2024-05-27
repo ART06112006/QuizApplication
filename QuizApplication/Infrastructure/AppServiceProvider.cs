@@ -103,17 +103,17 @@ namespace QuizApplication.Infrastructure
         public string QuestionsUrl { get; set; }
     }
 
-    public class TagsResolver : IValueResolver<APIQuestion, Question, IEnumerable<Tag>>
+    public class TagsResolver : IValueResolver<APIQuestion, Question, ICollection<Tag>>
     {
-        public IEnumerable<Tag> Resolve(APIQuestion source, Question destination, IEnumerable<Tag> destMember, ResolutionContext context)
+        public ICollection<Tag> Resolve(APIQuestion source, Question destination, ICollection<Tag> destMember, ResolutionContext context)
         {
             return source.Tags?.Select(tag => new Tag { Text = tag }).ToList() ?? new List<Tag>();
         }
     }
 
-    public class IncorrectAnswersResolver : IValueResolver<APIQuestion, Question, IEnumerable<Answer>>
+    public class IncorrectAnswersResolver : IValueResolver<APIQuestion, Question, ICollection<Answer>>
     {
-        public IEnumerable<Answer> Resolve(APIQuestion source, Question destination, IEnumerable<Answer> destMember, ResolutionContext context)
+        public ICollection<Answer> Resolve(APIQuestion source, Question destination, ICollection<Answer> destMember, ResolutionContext context)
         {
             return source.IncorrectAnswers?.Select(answer => new Answer { Text = answer }).ToList() ?? new List<Answer>();
         }
