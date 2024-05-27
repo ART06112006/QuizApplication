@@ -36,7 +36,7 @@ namespace QuizApplication.Repositories
             {
                 using (var _appDbContext = await AppServiceProvider.GetAppDbContextAsync())
                 {
-                    return await _appDbContext.Quizes.Include(x => x.Questions).Include(x => x.AnsweredQuestions).Where(predicate).FirstOrDefaultAsync();
+                    return await _appDbContext.Quizes.Include(x => x.Questions).Where(predicate).FirstOrDefaultAsync();
                 }
             }
             catch
