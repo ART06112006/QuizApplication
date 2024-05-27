@@ -31,6 +31,10 @@ namespace QuizApplication.Context
         {
             //Quiz
             modelBuilder.Entity<Quiz>().HasMany(x => x.Questions).WithOne(x => x.Quiz).HasForeignKey(x => x.QuizId);
+
+            //Question
+            modelBuilder.Entity<Question>().HasMany(x => x.Tags).WithOne(x => x.Question).HasForeignKey(x => x.QuestionId);
+            modelBuilder.Entity<Question>().HasMany(x => x.IncorrectAnswers).WithOne(x => x.Question).HasForeignKey(x => x.QuestionId);
         }
 
         public DbSet<Quiz> Quizes { get; set; }
