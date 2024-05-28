@@ -84,7 +84,6 @@ namespace QuizApplication.ViewModels
 
         public void UpdateUI(Quiz quiz)
         {
-            MyQuiz = new Quiz();
             MyQuiz = quiz;
             Questions = new ObservableCollection<Question>(MyQuiz.Questions);
             CurrentQuestion = Questions[0];
