@@ -67,32 +67,20 @@
             </Button>
         </Grid>
 
-        <ListView Grid.Column="0" Width="250" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  HorizontalContentAlignment="Center" Background="#ff222222" ItemsSource="{Binding}">
+        <ListView Grid.Column="0" Width="250" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontWeight="Bold"
+                  HorizontalContentAlignment="Left" Background="#ff222222" ItemsSource="{Binding QuizList, UpdateSourceTrigger=PropertyChanged}" Foreground="White">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel></WrapPanel>
+                    <StackPanel></StackPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="10">
-                        <Border BorderThickness="2">
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Text="Title"/>
-                                <TextBlock Grid.Row="1" Text="Correct"/>
-                                <TextBlock Grid.Row="1" Text="Incorrect"/>
-                                <TextBlock Grid.Row="2" Text="Date"/>
-                            </Grid>
-                        </Border>
+                        <TextBlock Text="{Binding}" HorizontalAlignment="Left"/>
+                        <Button Content="Load quiz" Command="{Binding DataContext.LoadQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
+                        <Button Content="Delete" HorizontalAlignment="Right" Margin="175,0,0,0" Command="{Binding DataContext.RemoveQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -24,7 +24,7 @@ namespace QuizApplication.Commands
                 if (quiz != null)
                 {
                     var quizService = (QuizService)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizService)));
-                    //await quizService.AddQuizAsync(quiz);
+                    await quizService.AddQuizAsync(quiz);
 
                     viewModel.Quiz = quiz;
                     viewModel.Close.Invoke();

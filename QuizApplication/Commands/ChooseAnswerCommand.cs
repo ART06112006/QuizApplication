@@ -1,4 +1,7 @@
-﻿using QuizApplication.ViewModels;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuizApplication.Infrastructure;
+using QuizApplication.Services;
+using QuizApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +17,14 @@ namespace QuizApplication.Commands
         public override void Execute(object? parameter)
         {
             var viewModel = parameter as QuizViewModel;
+            var service = (QuizService)AppServiceProvider.ServiceProvider.GetService<QuizService>();
 
             if(viewModel.SelectedAnswers == null)
             {
                 return;
             }
+
+            viewModel.Questions[counter].UserAnswer = viewModel.SelectedAnswers;
             if (viewModel.Questions[counter].CorrectAnswer == viewModel.SelectedAnswers)
             {
                 viewModel.MyQuiz.TotalScore += 1;
@@ -39,6 +45,7 @@ namespace QuizApplication.Commands
             {
                 MessageBox.Show($"End of test. Your score : {viewModel.MyQuiz.TotalScore}");
                 viewModel.MyQuiz.IsFinished = true;
+                Task.Run(async () => { await service.UpdateQuizAsync(viewModel.MyQuiz); });
                 counter = 0;
             }
             //counter++;

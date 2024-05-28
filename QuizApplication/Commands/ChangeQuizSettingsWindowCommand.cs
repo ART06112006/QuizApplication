@@ -1,4 +1,6 @@
-﻿using QuizApplication.Infrastructure;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuizApplication.Infrastructure;
+using QuizApplication.Services;
 using QuizApplication.ViewModels;
 using QuizApplication.Views;
 using System;
@@ -18,8 +20,10 @@ namespace QuizApplication.Commands
 
             if (window._quizSettingsViewModel.Quiz != null)
             {
+                var service = (QuizService)AppServiceProvider.ServiceProvider.GetService<QuizService>();
                 var viewModel = parameter as QuizViewModel;
                 viewModel.UpdateUI(window._quizSettingsViewModel.Quiz);
+                viewModel.LoadInfo(service);
             }
         }
     }

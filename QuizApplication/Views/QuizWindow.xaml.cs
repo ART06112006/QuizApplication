@@ -46,6 +46,5 @@ namespace QuizApplication.Views
                 radioButton.IsChecked = false;
             }
         }
-
     }
 }

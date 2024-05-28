@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuizApplication.Infrastructure;
+using QuizApplication.Services;
 using QuizApplication.Views;
 using System.Configuration;
 using System.Data;
@@ -15,6 +16,10 @@ namespace QuizApplication
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             AppServiceProvider.Initialize();
+            var quizService = AppServiceProvider.ServiceProvider.GetService<QuizService>();
+            var aPIQuestionService = AppServiceProvider.ServiceProvider.GetService<APIQuestionService>();
+            quizService.ExceptionMessage = x => MessageBox.Show(x, "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            aPIQuestionService.ExceptionMessage = x => MessageBox.Show(x, "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
             QuizWindow quizWindow = AppServiceProvider.ServiceProvider.GetService<QuizWindow>();
             quizWindow.Show();
         }
