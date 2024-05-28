@@ -79,7 +79,7 @@
                 <DataTemplate>
                     <Grid Margin="10">
                         <TextBlock Text="{Binding}" HorizontalAlignment="Left"/>
-                        <Button Content="Load quiz" Command="{Binding DataContext.LoadQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
+                        <Button Content="Load quiz" Width="100" Command="{Binding DataContext.LoadQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
                         <Button Content="Delete" HorizontalAlignment="Right" Margin="175,0,0,0" Command="{Binding DataContext.RemoveQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>

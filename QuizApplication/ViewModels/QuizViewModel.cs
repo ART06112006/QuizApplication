@@ -117,13 +117,13 @@ namespace QuizApplication.ViewModels
             Answers = new List<string>(answers);
         }
 
-        public QuizViewModel(ChangeQuizSettingsWindowCommand changeQuizSettingsWindow, LoadQuizCommand loadQuiz,
-            ChooseAnswerCommand chooseAnswerCommand, QuizService quizService, RemoveQuizCommand removeQuiz)
+        public QuizViewModel(ChangeQuizSettingsWindowCommand changeQuizSettingsWindow,
+            ChooseAnswerCommand chooseAnswerCommand, QuizService quizService)
         {
             StartQuiz = changeQuizSettingsWindow;
             ChooseAnswerCommand = chooseAnswerCommand;
-            RemoveQuizCommand = removeQuiz;
-            LoadQuizCommand = loadQuiz;
+            RemoveQuizCommand = new RemoveQuizCommand(this);
+            LoadQuizCommand = new LoadQuizCommand(this);
             LoadInfo(quizService);
         }
 
@@ -136,7 +136,5 @@ namespace QuizApplication.ViewModels
         public ICommand ChooseAnswerCommand { get; set; }
         public ICommand RemoveQuizCommand { get; set; }
         public ICommand LoadQuizCommand { get; private set; }
-
-        public int count = 0;
     }
 }
