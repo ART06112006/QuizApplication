@@ -116,7 +116,7 @@ namespace QuizApplication.ViewModels
             Answers = new List<string>(answers);
         }
 
-        public QuizViewModel(ChangeQuizSettingsWindowCommand changeQuizSettingsWindow,
+        public QuizViewModel(ChangeQuizSettingsWindowCommand changeQuizSettingsWindow, 
             ChooseAnswerCommand chooseAnswerCommand, QuizService quizService, SaveQuizCommand saveQuiz)
         {
             StartQuiz = changeQuizSettingsWindow;

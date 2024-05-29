@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuizApplication.Infrastructure;
+using QuizApplication.Models;
 using QuizApplication.Services;
 using QuizApplication.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,12 +30,6 @@ namespace QuizApplication.Commands
             if (viewModel.Questions[counter].CorrectAnswer == viewModel.SelectedAnswers)
             {
                 viewModel.MyQuiz.TotalScore += 1;
-                MessageBox.Show("Correct");
-                //await service.UpdateQuizAsync(viewModel.MyQuiz);
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Answer");
             }
 
             counter++;
@@ -44,13 +40,22 @@ namespace QuizApplication.Commands
             }
             else
             {
-                MessageBox.Show($"End of test. Your score : {viewModel.MyQuiz.TotalScore}");
+                //MessageBox.Show($"End of test. Your score : {viewModel.MyQuiz.TotalScore}");
                 viewModel.MyQuiz.IsFinished = true;
+
+                var result = AppServiceProvider.ServiceProvider.GetService<ResultViewModel>();
+                result.Quiz = viewModel.MyQuiz;
+                result.Questions = new ObservableCollection<Question>(viewModel.Questions);
+                result.CheckAnswers(viewModel.Questions);
+
+                var windowRes = AppServiceProvider.ServiceProvider.GetService<ResultWindow>();
+                windowRes.DataContext = result;
+                windowRes.ShowDialog();
+
                 viewModel.MyQuiz.Questions = null;
                 await service.UpdateQuizAsync(viewModel.MyQuiz);
                 counter = 0;
             }
-            //counter++;
         }
     }
 }

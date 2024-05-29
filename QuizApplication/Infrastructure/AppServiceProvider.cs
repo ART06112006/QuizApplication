@@ -40,10 +40,12 @@ namespace QuizApplication.Infrastructure
             //Views
             services.AddTransient<QuizWindow>();
             services.AddTransient<QuizSettingsWindow>();
+            services.AddTransient<ResultWindow>();
 
             //ViewModels
             services.AddTransient<QuizViewModel>();
             services.AddTransient<QuizSettingsViewModel>();
+            services.AddTransient<ResultViewModel>();
 
             //AutoMapper
             services.AddAutoMapper(typeof(AppServiceProvider));
@@ -63,6 +65,7 @@ namespace QuizApplication.Infrastructure
             services.AddTransient<RemoveQuizCommand>();
             services.AddTransient<LoadQuizCommand>();
             services.AddTransient<SaveQuizCommand>();
+            services.AddTransient<ShowResultCommand>();
 
             ServiceProvider = services.BuildServiceProvider();
         }
