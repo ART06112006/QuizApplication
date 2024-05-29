@@ -28,12 +28,12 @@
                 </Border.BorderBrush>
                 <Grid>
                     <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -41,10 +41,10 @@
 
                     <TextBlock Grid.Row="1" Margin="30,0,0,0" Text="{Binding CurrentQuestion.Text}" FontSize="17" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center"/>
 
-                    <RadioButton Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[0]}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
-                    <RadioButton Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[1]}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
-                    <RadioButton Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[2]}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
-                    <RadioButton Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[3]}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
+                    <RadioButton Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[0], UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
+                    <RadioButton Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[1], UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
+                    <RadioButton Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[2], UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
+                    <RadioButton Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Foreground="White" Content="{Binding Answers[3], UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChooseAnswerCommand}" CommandParameter="{Binding}" Checked="RadioButton_Checked"/>
                 </Grid>
             </Border>
 
@@ -65,7 +65,25 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+
+
+            <Button Grid.Row="2" Width="150" Height="43" Margin="10" Content="Save" Command="{Binding SaveQuizCommand}" HorizontalAlignment="Right"
+                    Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="Transparent" CommandParameter="{Binding}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#f16e6c" Offset="0.3"/>
+                        <GradientStop Color="#ff9b19" Offset="0.9"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
+
 
         <ListView Grid.Column="0" Width="250" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontWeight="Bold"
                   HorizontalContentAlignment="Left" Background="#ff222222" ItemsSource="{Binding QuizList, UpdateSourceTrigger=PropertyChanged}" Foreground="White">
@@ -79,8 +97,39 @@
                 <DataTemplate>
                     <Grid Margin="10">
                         <TextBlock Text="{Binding}" HorizontalAlignment="Left"/>
-                        <Button Content="Load quiz" Width="100" Command="{Binding DataContext.LoadQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
-                        <Button Content="Delete" HorizontalAlignment="Right" Margin="175,0,0,0" Command="{Binding DataContext.RemoveQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"/>
+                        <Button Content="Load quiz" Width="80" Command="{Binding DataContext.LoadQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                CommandParameter="{Binding}" Margin="70,0,60,0" Height="25" Foreground="White">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#f16e6c" Offset="0.3"/>
+                                    <GradientStop Color="#ff9b19" Offset="0.9"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        
+                        <Button Content="Delete" HorizontalAlignment="Right"
+                                Command="{Binding DataContext.RemoveQuizCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                CommandParameter="{Binding}" Foreground="White" Width="50">
+
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#f16e6c" Offset="0.3"/>
+                                    <GradientStop Color="#ff9b19" Offset="0.9"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

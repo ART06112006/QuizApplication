@@ -62,6 +62,7 @@ namespace QuizApplication.Infrastructure
             services.AddTransient<ChooseAnswerCommand>();
             services.AddTransient<RemoveQuizCommand>();
             services.AddTransient<LoadQuizCommand>();
+            services.AddTransient<SaveQuizCommand>();
 
             ServiceProvider = services.BuildServiceProvider();
         }

@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QuizApplication.Commands
 {
@@ -26,11 +27,35 @@ namespace QuizApplication.Commands
 
             if (name != null)
             {
-                var service = (QuizService)AppServiceProvider.ServiceProvider.GetService<QuizService>();
+                var service = AppServiceProvider.ServiceProvider.GetService<QuizService>();
                 _viewModel.MyQuiz = await service.GetQuizAsync(name);
-                var questions = _viewModel.MyQuiz.Questions;
-                _viewModel.Questions = new ObservableCollection<Question>(questions);
-                _viewModel.UpdateUI(_viewModel.MyQuiz);
+
+                if (_viewModel.MyQuiz.IsFinished)
+                {
+                    var questions = _viewModel.MyQuiz.Questions;
+                    _viewModel.Questions = new ObservableCollection<Question>(questions);
+                    _viewModel.MyQuiz.IsFinished = false;
+                    _viewModel.MyQuiz.TotalScore = 0;
+                    _viewModel.UpdateUI(_viewModel.MyQuiz);
+                    return;
+                }
+
+                MessageBoxResult messageBoxResult = MessageBox.Show("Do you want to continue this Quiz ?", "", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                if (messageBoxResult == MessageBoxResult.Yes && !_viewModel.MyQuiz.IsFinished)
+                {
+                    var questions = _viewModel.MyQuiz.Questions.Where(x => x.UserAnswer == null).ToList();
+                    _viewModel.MyQuiz.Questions = questions;
+                    _viewModel.UpdateUI(_viewModel.MyQuiz);
+                }
+                else
+                {
+                    var questions = _viewModel.MyQuiz.Questions;
+                    _viewModel.Questions = new ObservableCollection<Question>(questions);
+                    _viewModel.MyQuiz.IsFinished = false;
+                    _viewModel.MyQuiz.TotalScore = 0;
+                    _viewModel.UpdateUI(_viewModel.MyQuiz);
+                }
             }
         }
     }

@@ -24,14 +24,31 @@
                 <Label Content="Quiz Type" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" Foreground="White" FontSize="15"/>
 
                 <StackPanel Grid.Row="1">
-                    <ListBox Width="200" Height="200" Margin="7" ItemsSource="{Binding Categories}" SelectionMode="Single" SelectionChanged="CategoriesListBox_SelectionChanged" x:Name="CategoriesListBox">
+                    <ListBox Width="200" Height="200" Margin="7" ItemsSource="{Binding Categories}" SelectionMode="Single"
+                             SelectionChanged="CategoriesListBox_SelectionChanged" x:Name="CategoriesListBox" Foreground="white">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" BorderBrush="White" BorderThickness="3">
+                                    <ScrollViewer>
+                                        <ItemsPresenter></ItemsPresenter>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ListBox.Template>
                     </ListBox>
                 </StackPanel>
 
                 <Label Content="Difficulty" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,20,0,0"/>
 
-                <ListBox Grid.Row="3" Width="200" Height="200" Margin="7" ItemsSource="{Binding Difficulty}" SelectionChanged="ListBox_SelectionChanged" x:Name="DifficultyListBox">
-                    
+                <ListBox Grid.Row="3" Width="200" Height="200" Margin="7" ItemsSource="{Binding Difficulty}" Background="White" 
+                         SelectionChanged="ListBox_SelectionChanged" x:Name="DifficultyListBox" Foreground="White">
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" BorderBrush="White" BorderThickness="3">
+                                <ItemsPresenter></ItemsPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </ListBox.Template>
                 </ListBox>
 
                 <Label Content="Questions number" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,20,0,0"/>
@@ -42,11 +59,23 @@
                     </ComboBox>
                 </WrapPanel>
 
-                <Button Content="New Quiz" Grid.Row="8" Width="70" Height="35" Margin="5,20,5,10" Command="{Binding StartQuiz}" CommandParameter="{Binding}">
-                   
+                <Button Content="New Quiz" Grid.Row="8" Width="70" Height="35" Margin="5,20,5,10" Foreground="White"
+                        Command="{Binding StartQuiz}" CommandParameter="{Binding}" FontWeight="Bold">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#f16e6c" Offset="0.3"/>
+                            <GradientStop Color="#ff9b19" Offset="0.9"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
                 </Button>
 
-                <Label Content="Quiz Name" HorizontalContentAlignment="Center" Grid.Row="6" FontSize="15" Foreground="White"/>
+                <Label Content="Quiz Name" HorizontalContentAlignment="Center" Grid.Row="6" FontSize="15" Foreground="White" Margin="0,20,0,0"/>
                 <TextBox Grid.Row="7" Text="{Binding QuizName}" Width="250"/>
 
             </Grid>

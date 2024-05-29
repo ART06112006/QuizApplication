@@ -14,7 +14,7 @@ namespace QuizApplication.Commands
     public class ChooseAnswerCommand : BaseCommand
     {
         private int counter = 0;
-        public override void Execute(object? parameter)
+        public override async void Execute(object? parameter)
         {
             var viewModel = parameter as QuizViewModel;
             var service = (QuizService)AppServiceProvider.ServiceProvider.GetService<QuizService>();
@@ -29,6 +29,7 @@ namespace QuizApplication.Commands
             {
                 viewModel.MyQuiz.TotalScore += 1;
                 MessageBox.Show("Correct");
+                //await service.UpdateQuizAsync(viewModel.MyQuiz);
             }
             else
             {
@@ -45,7 +46,8 @@ namespace QuizApplication.Commands
             {
                 MessageBox.Show($"End of test. Your score : {viewModel.MyQuiz.TotalScore}");
                 viewModel.MyQuiz.IsFinished = true;
-                Task.Run(async () => { await service.UpdateQuizAsync(viewModel.MyQuiz); });
+                viewModel.MyQuiz.Questions = null;
+                await service.UpdateQuizAsync(viewModel.MyQuiz);
                 counter = 0;
             }
             //counter++;
