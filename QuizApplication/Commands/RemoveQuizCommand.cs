@@ -5,6 +5,7 @@ using QuizApplication.Services;
 using QuizApplication.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,21 @@ namespace QuizApplication.Commands
 
             if(messageBoxResult == MessageBoxResult.Yes)
             {
-                await service.RemoveQuizAsync(title);
-                _viewModel.LoadInfo(service);
+                if (_viewModel.MyQuiz.IsFinished)
+                {
+                    await service.RemoveQuizAsync(title);
+                    _viewModel.MyQuiz = new Quiz();
+                    _viewModel.CurrentQuestion = null;
+                    _viewModel.CurrentQuestion = new Question();
+                    _viewModel.Questions = null;
+                    _viewModel.Answers = new List<string>();
+                    _viewModel.Answers = null;
+                    _viewModel.LoadInfo(service);
+                }
+                else
+                {
+                    MessageBox.Show("You can`t delete quiz");
+                }
             }
         }
     }

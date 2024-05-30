@@ -81,5 +81,23 @@ namespace QuizApplication.Views
             selectedDiffListBox.Items.Clear();
             _quizSettingsViewModel.SelectedDifficulty.Clear();
         }
+
+        private void selectedDiffListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (selectedDiffListBox.SelectedItem != null)
+            {
+                _quizSettingsViewModel.SelectedDifficulty.Remove(selectedDiffListBox.SelectedItem.ToString());
+                selectedDiffListBox.Items.Remove(selectedDiffListBox.SelectedItem);
+            }
+        }
+
+        private void selectedListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(selectedListBox.SelectedItem != null)
+            {
+                _quizSettingsViewModel.SelectedCategories.Remove(selectedListBox.SelectedItem.ToString());
+                selectedListBox.Items.Remove(selectedListBox.SelectedItem);
+            }
+        }
     }
 }

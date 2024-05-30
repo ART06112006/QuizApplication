@@ -37,7 +37,7 @@
                         </ListBox.Template>
                     </ListBox>
 
-                    <ListBox Foreground="White" Height="90" Width="200" Name="selectedListBox">
+                    <ListBox Foreground="White" Height="90" Width="200" Name="selectedListBox" SelectionChanged="selectedListBox_SelectionChanged">
                         <ListBox.Template>
                             <ControlTemplate>
                                 <Border CornerRadius="10" BorderBrush="White" BorderThickness="3">
@@ -79,7 +79,7 @@
                     </ListBox.Template>
                     </ListBox>
 
-                    <ListBox Foreground="White" Height="90" Width="200" Name="selectedDiffListBox">
+                    <ListBox Foreground="White" Height="90" Width="200" Name="selectedDiffListBox" SelectionChanged="selectedDiffListBox_SelectionChanged">
                         <ListBox.Template>
                             <ControlTemplate>
                                 <Border CornerRadius="10" BorderBrush="White" BorderThickness="3">

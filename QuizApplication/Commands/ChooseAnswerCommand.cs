@@ -21,7 +21,7 @@ namespace QuizApplication.Commands
             var viewModel = parameter as QuizViewModel;
             var service = (QuizService)AppServiceProvider.ServiceProvider.GetService<QuizService>();
 
-            if(viewModel.SelectedAnswers == null)
+            if(viewModel.SelectedAnswers == null || viewModel.Questions == null)
             {
                 return;
             }
@@ -30,7 +30,6 @@ namespace QuizApplication.Commands
             if (viewModel.Questions[viewModel.counter].CorrectAnswer == viewModel.SelectedAnswers)
             {
                 viewModel.MyQuiz.TotalScore += 1;
-                //await service.UpdateQuizAsync(viewModel.MyQuiz);
             }
 
             viewModel.counter++;
