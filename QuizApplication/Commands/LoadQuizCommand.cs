@@ -32,10 +32,19 @@ namespace QuizApplication.Commands
 
                 if (_viewModel.MyQuiz.IsFinished)
                 {
-                    var questions = _viewModel.MyQuiz.Questions;
+                    var questions = _viewModel.MyQuiz.Questions.ToList();
+                    for(int i=0; i < questions.Count; i++)
+                    {
+                        questions[i].UserAnswer = null;
+                    }
+
+                    _viewModel.MyQuiz.Questions = questions;
+
+                    await service.UpdateQuizAsync(_viewModel.MyQuiz);
                     _viewModel.Questions = new ObservableCollection<Question>(questions);
                     _viewModel.MyQuiz.IsFinished = false;
                     _viewModel.MyQuiz.TotalScore = 0;
+                    _viewModel.counter = 0;
                     _viewModel.UpdateUI(_viewModel.MyQuiz);
                     return;
                 }
@@ -45,15 +54,26 @@ namespace QuizApplication.Commands
                 if (messageBoxResult == MessageBoxResult.Yes && !_viewModel.MyQuiz.IsFinished)
                 {
                     var questions = _viewModel.MyQuiz.Questions.Where(x => x.UserAnswer == null).ToList();
-                    _viewModel.MyQuiz.Questions = questions;
+                    _viewModel.Questions =new ObservableCollection<Question>(questions);
+                    _viewModel.counter = 0;
                     _viewModel.UpdateUI(_viewModel.MyQuiz);
                 }
                 else
                 {
-                    var questions = _viewModel.MyQuiz.Questions;
+                    var questions = _viewModel.MyQuiz.Questions.ToList();
+
+                    for (int i = 0; i < questions.Count; i++)
+                    {
+                        questions[i].UserAnswer = null;
+                    }
+
+                    _viewModel.MyQuiz.Questions = questions;
+
+                    await service.UpdateQuizAsync(_viewModel.MyQuiz);
                     _viewModel.Questions = new ObservableCollection<Question>(questions);
                     _viewModel.MyQuiz.IsFinished = false;
                     _viewModel.MyQuiz.TotalScore = 0;
+                    _viewModel.counter = 0;
                     _viewModel.UpdateUI(_viewModel.MyQuiz);
                 }
             }

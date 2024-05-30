@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QuizApplication.Commands
 {
@@ -16,19 +17,26 @@ namespace QuizApplication.Commands
         {
             var viewModel = parameter as QuizSettingsViewModel;
 
-            if (viewModel != null)
+            if (viewModel.SelectedCategories.Count != 0 && viewModel.SelectedDifficulty.Count != 0 && viewModel.QuestionLimit != null && viewModel.QuizName != null)
             {
-                var apiQuestionService = (APIQuestionService)(AppServiceProvider.ServiceProvider.GetService(typeof(APIQuestionService)));
-                var quiz = await apiQuestionService.GetQuizAsync(viewModel.QuizName, int.Parse(viewModel.QuestionLimit.ToString()), viewModel.SelectedDifficulty, viewModel.SelectedCategories);
-
-                if (quiz != null)
+                if (viewModel != null)
                 {
-                    var quizService = (QuizService)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizService)));
-                    await quizService.AddQuizAsync(quiz);
+                    var apiQuestionService = (APIQuestionService)(AppServiceProvider.ServiceProvider.GetService(typeof(APIQuestionService)));
+                    var quiz = await apiQuestionService.GetQuizAsync(viewModel.QuizName, int.Parse(viewModel.QuestionLimit.ToString()), viewModel.SelectedDifficulty, viewModel.SelectedCategories);
 
-                    viewModel.Quiz = quiz;
-                    viewModel.Close.Invoke();
+                    if (quiz != null)
+                    {
+                        var quizService = (QuizService)(AppServiceProvider.ServiceProvider.GetService(typeof(QuizService)));
+                        await quizService.AddQuizAsync(quiz);
+
+                        viewModel.Quiz = quiz;
+                        viewModel.Close.Invoke();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Input all fields");
             }
         }
     }

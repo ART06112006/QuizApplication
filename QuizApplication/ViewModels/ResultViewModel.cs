@@ -48,18 +48,6 @@ namespace QuizApplication.ViewModels
         public void CheckAnswers(ObservableCollection<Question> Questions)
         {
             var questions = new ObservableCollection<Question>();
-            //foreach (var item in Questions)
-            //{
-            //    if (item.UserAnswer == item.CorrectAnswer)
-            //    {
-            //        item.UserAnswer += " -- correct";
-            //    }
-            //    else
-            //    {
-            //        item.UserAnswer += " -- incorrect";
-            //        //questions.Add(item.UserAnswer);
-            //    }
-            //}
 
             for(int i=0; i < Questions.Count; i++)
             {
@@ -77,5 +65,11 @@ namespace QuizApplication.ViewModels
 
             this.Questions = new ObservableCollection<Question>(questions);
         }
+
+        public ResultViewModel()
+        {
+            
+        }
+
     }
 }
