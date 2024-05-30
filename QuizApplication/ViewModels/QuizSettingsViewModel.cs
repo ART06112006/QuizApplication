@@ -108,7 +108,6 @@ namespace QuizApplication.ViewModels
         }
 
         public ICommand StartQuiz { get; set; }
-
         public Action Close { get; set; }
 
         private async void LoadInfo()

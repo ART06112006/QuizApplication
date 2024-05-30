@@ -36,11 +36,39 @@
                             </ControlTemplate>
                         </ListBox.Template>
                     </ListBox>
+
+                    <ListBox Foreground="White" Height="90" Width="200" Name="selectedListBox">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" BorderBrush="White" BorderThickness="3">
+                                    <ScrollViewer>
+                                        <ItemsPresenter></ItemsPresenter>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                    </ListBox>
+
+                    <Button Content="Clear" Click="Button_Click_1" Width="70" Height="30" Margin="8" Foreground="White" FontWeight="Bold">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
+
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#f16e6c" Offset="0.3"/>
+                                <GradientStop Color="#ff9b19" Offset="0.9"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </StackPanel>
 
                 <Label Content="Difficulty" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,20,0,0"/>
 
-                <ListBox Grid.Row="3" Width="200" Height="200" Margin="7" ItemsSource="{Binding Difficulty}" Background="White" 
+                <StackPanel Grid.Row="3">
+                    <ListBox Width="200" Height="100" Margin="7" ItemsSource="{Binding Difficulty}" Background="White" 
                          SelectionChanged="ListBox_SelectionChanged" x:Name="DifficultyListBox" Foreground="White">
                     <ListBox.Template>
                         <ControlTemplate>
@@ -49,7 +77,35 @@
                             </Border>
                         </ControlTemplate>
                     </ListBox.Template>
-                </ListBox>
+                    </ListBox>
+
+                    <ListBox Foreground="White" Height="90" Width="200" Name="selectedDiffListBox">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" BorderBrush="White" BorderThickness="3">
+                                    <ScrollViewer>
+                                        <ItemsPresenter></ItemsPresenter>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                    </ListBox>
+
+                    <Button Content="Clear" Click="Button_Click_3" Width="70" Height="30" Margin="8" Foreground="White" FontWeight="Bold">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
+
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#f16e6c" Offset="0.3"/>
+                                <GradientStop Color="#ff9b19" Offset="0.9"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
 
                 <Label Content="Questions number" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,20,0,0"/>
 
