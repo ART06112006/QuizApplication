@@ -30,6 +30,11 @@ namespace QuizApplication.Commands
             if (viewModel.Questions[viewModel.counter].CorrectAnswer == viewModel.SelectedAnswers)
             {
                 viewModel.MyQuiz.TotalScore += 1;
+                MessageBox.Show("Correct");
+            }
+            else
+            {
+                MessageBox.Show("Incorrect");
             }
 
             viewModel.counter++;
