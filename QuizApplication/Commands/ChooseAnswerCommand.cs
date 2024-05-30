@@ -51,7 +51,12 @@ namespace QuizApplication.Commands
                 var windowRes = AppServiceProvider.ServiceProvider.GetService<ResultWindow>();
                 windowRes.DataContext = result;
                 windowRes.Show();
-                viewModel.MyQuiz.Questions = null;
+                viewModel.MyQuiz = new Quiz();
+                viewModel.CurrentQuestion = null;
+                viewModel.CurrentQuestion = new Question();
+                viewModel.Questions = null;
+                viewModel.Answers = new List<string>();
+                viewModel.Answers = null;
                 viewModel.counter = 0;
             }
         }
