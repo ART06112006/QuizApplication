@@ -53,12 +53,12 @@ namespace QuizApplication.ViewModels
             {
                 if (Questions[i].UserAnswer == Questions[i].CorrectAnswer)
                 {
-                    Questions[i].UserAnswer += " -- correct";
+                    Questions[i].UserAnswer += " -- correct ,Correct Answer : ";
                     questions.Add(Questions[i]);
                 }
                 else
                 {
-                    Questions[i].UserAnswer += " -- incorrect";
+                    Questions[i].UserAnswer += " -- incorrect  ,Correct Answer : ";
                     questions.Add(Questions[i]);
                 }
             }
