@@ -77,12 +77,5 @@ namespace QuizApplication.ViewModels
 
             this.Questions = new ObservableCollection<Question>(questions);
         }
-
-        public ResultViewModel(ShowResultCommand showResult)
-        {
-            ShowResultCommand = showResult;
-        }
-
-        public ICommand ShowResultCommand { get; set; }
     }
 }
