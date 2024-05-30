@@ -41,7 +41,7 @@
 
 
                             <TextBlock Text="{Binding Text}" FontSize="13" FontWeight="Bold" Margin="5" Foreground="White" VerticalAlignment="Bottom" Grid.Row="0" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding UserAnswer}" FontSize="13" FontWeight="Regular" Foreground="BurlyWood" VerticalAlignment="Bottom" Grid.Row="1" Margin="5" Name="AnswerTextBox">
+                            <TextBlock Text="{Binding UserAnswer}" FontSize="13" FontWeight="Regular" Foreground="BurlyWood" VerticalAlignment="Bottom" Grid.Row="1" Margin="5" Name="AnswerTextBox" TextWrapping="Wrap">
                                
                             </TextBlock>
                         </Grid>
