@@ -67,7 +67,7 @@
             </Button>
 
 
-            <Button Grid.Row="2" Width="150" Height="43" Margin="10" Content="Save" Command="{Binding SaveQuizCommand}" HorizontalAlignment="Right"
+            <Button Grid.Row="2" Width="150" Height="43" Margin="10" Content="Save quiz" Command="{Binding SaveQuizCommand}" HorizontalAlignment="Right"
                     Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="Transparent" CommandParameter="{Binding}">
                 <Button.Resources>
                     <Style TargetType="Border">
