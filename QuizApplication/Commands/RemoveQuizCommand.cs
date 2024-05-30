@@ -31,6 +31,7 @@ namespace QuizApplication.Commands
 
             if(messageBoxResult == MessageBoxResult.Yes)
             {
+                _viewModel.MyQuiz = await service.GetQuizAsync(title);
                 if (_viewModel.MyQuiz.IsFinished)
                 {
                     await service.RemoveQuizAsync(title);
