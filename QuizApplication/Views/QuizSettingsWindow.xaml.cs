@@ -36,11 +36,18 @@ namespace QuizApplication.Views
             {
                 if (category == CategoriesListBox.SelectedItem.ToString())
                 {
-                    _quizSettingsViewModel.SelectedCategories.Add(category.ToString());
-                    break;
+                    if (!_quizSettingsViewModel.SelectedCategories.Contains(category))
+                    {
+                        _quizSettingsViewModel.SelectedCategories.Add(category.ToString());
+                        selectedListBox.Items.Add(category);
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("This category is added");
+                    }
                 }
             }
-            
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,10 +56,30 @@ namespace QuizApplication.Views
             {
                 if (category == DifficultyListBox.SelectedItem.ToString())
                 {
-                    _quizSettingsViewModel.SelectedDifficulty.Add(category.ToString());
+                    if (!_quizSettingsViewModel.SelectedDifficulty.Contains(category))
+                    {
+                        _quizSettingsViewModel.SelectedDifficulty.Add(category.ToString());
+                        selectedDiffListBox.Items.Add(category);
+                    }
+                    else
+                    {
+                        MessageBox.Show("This item is added");
+                    }
                     break;
                 }
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            selectedListBox.Items.Clear();
+            _quizSettingsViewModel.SelectedCategories.Clear();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            selectedDiffListBox.Items.Clear();
+            _quizSettingsViewModel.SelectedDifficulty.Clear();
         }
     }
 }
