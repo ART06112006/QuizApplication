@@ -85,7 +85,7 @@ namespace QuizApplication.ViewModels
         public void UpdateUI(Quiz quiz)
         {
             MyQuiz = quiz;
-            Questions = new ObservableCollection<Question>(MyQuiz.Questions);
+            //Questions = new ObservableCollection<Question>(MyQuiz.Questions);
             CurrentQuestion = Questions[0];
 
             var incorrectQuestions = new List<Answer>(CurrentQuestion.IncorrectAnswers);
@@ -137,5 +137,6 @@ namespace QuizApplication.ViewModels
         public ICommand RemoveQuizCommand { get; set; }
         public ICommand LoadQuizCommand { get; private set; }
         public ICommand SaveQuizCommand { get; private set; }
+        public int counter = 0;
     }
 }

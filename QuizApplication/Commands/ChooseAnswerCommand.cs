@@ -15,7 +15,7 @@ namespace QuizApplication.Commands
 {
     public class ChooseAnswerCommand : BaseCommand
     {
-        private int counter = 0;
+        //private int counter = 0;
         public override async void Execute(object? parameter)
         {
             var viewModel = parameter as QuizViewModel;
@@ -26,35 +26,34 @@ namespace QuizApplication.Commands
                 return;
             }
 
-            viewModel.Questions[counter].UserAnswer = viewModel.SelectedAnswers;
-            if (viewModel.Questions[counter].CorrectAnswer == viewModel.SelectedAnswers)
+            viewModel.Questions[viewModel.counter].UserAnswer = viewModel.SelectedAnswers;
+            if (viewModel.Questions[viewModel.counter].CorrectAnswer == viewModel.SelectedAnswers)
             {
                 viewModel.MyQuiz.TotalScore += 1;
+                //await service.UpdateQuizAsync(viewModel.MyQuiz);
             }
 
-            counter++;
-            if (counter < viewModel.Questions.Count)
+            viewModel.counter++;
+            if (viewModel.counter < viewModel.Questions.Count)
             {
                 
-                viewModel.SwitchQuestion(viewModel.Questions[counter]);
+                viewModel.SwitchQuestion(viewModel.Questions[viewModel.counter]);
             }
             else
             {
-                //MessageBox.Show($"End of test. Your score : {viewModel.MyQuiz.TotalScore}");
                 viewModel.MyQuiz.IsFinished = true;
+                await service.UpdateQuizAsync(viewModel.MyQuiz);
 
                 var result = AppServiceProvider.ServiceProvider.GetService<ResultViewModel>();
                 result.Quiz = viewModel.MyQuiz;
-                result.Questions = new ObservableCollection<Question>(viewModel.Questions);
-                result.CheckAnswers(viewModel.Questions);
+                var questions = new ObservableCollection<Question>(viewModel.MyQuiz.Questions);
+                result.CheckAnswers(questions);
 
                 var windowRes = AppServiceProvider.ServiceProvider.GetService<ResultWindow>();
                 windowRes.DataContext = result;
-                windowRes.ShowDialog();
-
+                windowRes.Show();
                 viewModel.MyQuiz.Questions = null;
-                await service.UpdateQuizAsync(viewModel.MyQuiz);
-                counter = 0;
+                viewModel.counter = 0;
             }
         }
     }
